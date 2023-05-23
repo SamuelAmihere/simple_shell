@@ -76,22 +76,27 @@ char *_strcpy(char *dest, const char *src)
 int _strcmp(const char *str1, const char *str2)
 {
 	int i = 0;
-
+	
+	/*check if eithr str has reached null yet*/
 	while (str1[i] != '\0' && str2[i] != '\0')
 	{
+		/*compare  they point to equal srings */
 		if (str1[i] == str2[i])
 		{
 			i++;
 			continue;
 		}
+		/*check if one string is greateror less than the other*/ 
 		else if (str1[i] > str2[i])
 			return (1);
 		else
 			return (-1);
 	}
-
+	
+	/*check if both  strings have ended at same string */
 	if (str1[i] == '\0' && str2[i] == '\0')
 		return (0);
+	/*checkif any string has reached NULL*/
 	else if (str1[i] == '\0')
 		return (-1);
 	else
@@ -106,6 +111,7 @@ int _strcmp(const char *str1, const char *str2)
 size_t _strlen(const char *str)
 {
 	size_t n = 0;
+	/*check if the value of n has not reached NULL*/
 	while (str[n] != '\0')
 	{
 		n++;
