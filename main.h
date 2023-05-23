@@ -16,7 +16,7 @@
 
 /*function prototypes*/
 extern char **environ;
-int *env(void);
+char *env(void);
 int shellexit(char **cmd, char *lineeptr);
 void free_all(char **cmd, char *lineptr, char **environ);
 
