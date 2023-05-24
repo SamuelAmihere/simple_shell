@@ -16,7 +16,7 @@
 
 /*function prototypes*/
 extern char **environ;
-char *env(void);
+int envi(void);
 int shellexit(char **cmd, char *lineeptr);
 void free_all(char **cmd, char *lineptr, char **environ);
 
@@ -35,5 +35,5 @@ int _strcmp(const char *str1, const char *str2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_strncpy(char *dest, char *src, int n);
 /*build ins*/
-char path_find(char **argv);
+char *path_find(char **argv);
 #endif

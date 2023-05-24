@@ -4,7 +4,7 @@
  *
  * Return: 1 - successful
  */
-int  *env(void)
+int envi(void)
 {
 	size_t i = 0;
 	/* check if the value of i is not NULL*/

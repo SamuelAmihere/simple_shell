@@ -9,7 +9,7 @@
  * Return: pointer to thr path , 0 if not found
  */
 
-char *path_find(char **cmd)
+char *path_find(char **argv)
 {
 char *path = getenv("PATH");
 char *dir;
