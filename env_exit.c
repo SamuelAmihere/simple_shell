@@ -11,8 +11,8 @@ int envi(void)
 
 	while(environ[i] != NULL)
 	{
-		if (_puts(environ[i]) == -1 || _puts("\n") == -1)
-			return (-1);
+		_puts(environ[i]);
+		_puts("\n");
 		i++;
 	}
 	return (0);
