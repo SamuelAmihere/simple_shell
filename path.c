@@ -6,25 +6,14 @@
 /**
  * path_find - finds the path to the command
  * @argv: pointer to an array of commands
- *
- * Return: pointer to thr path , 0 if not found
+ * * Return: pointer to thr path , 0 if not found
  */
-<<<<<<< HEAD
 char *path_find(char **argv)
-=======
-
-char *path_find(char **cmd)
->>>>>>> b9bb8d1b148d83132c3a9692dc4e123c5a5ffc1e
 {
 char *path = getenv("PATH");
 char *dir;
 char *path_hold = strtok(path, ":");
-<<<<<<< HEAD
-=======
-struct stat buffer;
-/*calculate the length of string and store in dir_len*eaclear
- * 
->>>>>>> b9bb8d1b148d83132c3a9692dc4e123c5a5ffc1e
+/*calculate the length of string and store in dir_len*/ 
 int dir_len = _strlen(argv[0]);
 while (path_hold != NULL)
 {
