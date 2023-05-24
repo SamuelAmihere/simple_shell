@@ -8,7 +8,7 @@
  * Return: pointer to duplicated string
  */
 
-char *_strdup(const char *str)
+char *_strdup(char *str)
 {
 	int i;
 	char *new_str;
@@ -44,22 +44,19 @@ char *_strdup(const char *str)
  * Return: pointer to destination
  */
 
-char *_strcpy(char *dest, const char *src)
+char *_strcpy(char *dest, char *src)
 {
-	int i;
+	int count = 0;
 
-	/*return NULL id src is NULL*/
-	if (!src || dest == src)
-		return (dest);
-	/*copy string from str to dest*/
-	for (i = 0; src[i] != '\0'; i++)
+	while (count >= 0)
 	{
-		dest[i] = src[i];
+		*(dest + count) = *(src + count);
+		if (*(src + count) == '\0')
+			break;
+		count++;
 	}
-	/*terminate dest with null character*/
-	dest[i] = '\0';
-
 	return (dest);
+
 }
 
 /**
@@ -73,7 +70,7 @@ char *_strcpy(char *dest, const char *src)
  * a positive value if the first is greater than the second
  */
 
-int _strcmp(const char *str1, const char *str2)
+int _strcmp(char *str1, char *str2)
 {
 	int i = 0;
 	
@@ -108,9 +105,9 @@ int _strcmp(const char *str1, const char *str2)
  * @str: pointer to  a string to calculate
  * Return:  number  of bytes in the string
  */
-size_t _strlen(const char *str)
+size_t _strlen(char *str)
 {
-	size_t n = 0;
+	int n = 0;
 	/*check if the value of n has not reached NULL*/
 	while (str[n] != '\0')
 	{
@@ -127,21 +124,21 @@ size_t _strlen(const char *str)
  *Return: 0;
  ** if src is NULL ||if dest and source pint to same string
  */
-char *_strcat(char *dest, const char *src)
+char *_strcat(char *dest, char *src)
 {
-	int i;
-	/*check  the string pointed to */
-	if (!src || dest == src)
-	{
-		return (dest);
-	}
-	/*copy string from src to dest */
-	for (i = 0; src[i] != '\0'; i++)
-	{
-		dest[i] = src[i];
-	}
-	/*terminate dest */
-	dest[i] =  '\0';
+	int count = 0, count2 = 0;
+	char *temp = dest;
 
-	return (dest);
+	while (*(temp + count) != '\0')
+		count++;
+
+	while (count2 >= 0)
+	{
+		*(temp + count) = *(src + count2);
+		if (*(src + count2) == '\0')
+			break;
+		count++;
+		count2++;
+	}
+	return (temp);
 }

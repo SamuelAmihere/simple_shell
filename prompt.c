@@ -55,12 +55,18 @@ void shell_prompt(__attribute__((unused)) shell_app * sh)
 void executeCommand(char *argv[], shell_app *sh)
 {
 	pid_t child_pid;
+	char *cmd = argv[0];
+	char *s = ": No such file or directory\n";
+	char *msg[MAX_ARGS];
+
+	msg[0] = cmd;
+	msg[1] = s;
 
 	child_pid = fork();
 	if (child_pid == 0)
 	{
 		if ((execve(argv[0], sh->av, sh->sh_environ)) < 0)
-			exec_err("No such file or directory\n");
+			exec_err(msg);
 
 	} else if (child_pid < 0)
 		exit_shell("Error creating child process", NULL, EXIT_FAILURE);
