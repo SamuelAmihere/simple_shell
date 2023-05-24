@@ -82,6 +82,7 @@ int _puts(char *str);
 int _count_char(char *str);
 int _atoi(char *s);
 char *_itos(int n);
+int _count_digits(int n);
 
 /*str_utils*/
 size_t _strlen(const char *str);
