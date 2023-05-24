@@ -27,7 +27,7 @@ _strcpy(dir, path_hold);
 _strcat(dir, "/");
 _strcat(dir, argv[0]);
 _strcat(dir, '\0');
-/*check if stat retrieved infor successesfuly */
+/*check for permissions */
 if ((access(dir, F_OK) == 0))
 {
 return (dir);
