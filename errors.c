@@ -12,9 +12,11 @@ void exec_err(char **msg)
 	int i;
 
 	str = build_err_message(msg);
+	if (!str)
+		return;
 	i = _strlen(str);
-
 	write(STDERR_FILENO, str, i);
+	free(str);
 }
 
 /**
@@ -26,7 +28,8 @@ void exec_err(char **msg)
  *
  * Return: void.
  */
-void exit_shell(__attribute__((unused)) char *msg, char *input, int code)
+void exit_shell(__attribute__((unused)) char *msg,
+		char *input, int code)
 {
 	if (msg)
 		perror(msg);
@@ -48,7 +51,6 @@ char *build_err_message(char **msg)
 	if (!tmp)
 		return (NULL);
 	tmp = _strcpy(tmp, msg[0]);
-	tmp = _strcat(tmp, ": ");
 	tmp = _strcat(tmp, msg[1]);
 
 	return (tmp);

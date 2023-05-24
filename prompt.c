@@ -35,6 +35,7 @@ void shell_prompt(__attribute__((unused)) shell_app * sh)
 				input[i] = '\0';
 			i++;
 		}
+
 		/*
 		argCount = tokenizeArgs(input, argv, DELIMS);
 		if (argCount == -1)
@@ -45,7 +46,6 @@ void shell_prompt(__attribute__((unused)) shell_app * sh)
 		executeCommand(argv, sh);
 	}
 }
-
 /**
  * executeCommand - executes a command.
  *
@@ -59,14 +59,13 @@ void executeCommand(char *argv[], shell_app *sh)
 {
 	pid_t child_pid;
 	int child_status;
-	char *cmd = sh->av[0];
-	char *s = ": No such file or directory\n";
 	char *msg[MAX_ARGS];
 
-	msg[0] = cmd;
-	msg[1] = s;
+	msg[0] = sh->av[0];
+	msg[1] = ": No such file or directory\n";
 
 	child_pid = fork();
+
 	if (child_pid == 0)
 	{
 		if ((execve(argv[0], sh->av, sh->sh_environ)) < 0)
