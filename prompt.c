@@ -55,7 +55,7 @@ void shell_prompt(__attribute__((unused)) shell_app * sh)
 void executeCommand(char *argv[], shell_app *sh)
 {
 	pid_t child_pid;
-	char *cmd = argv[0];
+	char *cmd = sh->av[0];
 	char *s = ": No such file or directory\n";
 	char *msg[MAX_ARGS];
 
