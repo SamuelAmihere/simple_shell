@@ -1,15 +1,15 @@
 #include "main.h"
 
 
-
 /**
- * shell_prompt - creates shell
+ * shell_prompt - runs the shell prompt.
  *
- * @sh: shell
+ * @av: array of arguments.
+ * @env: array of environment variables.
  *
- * Return: nothing
+ * Return: void.
  */
-void shell_prompt(__attribute__((unused)) shell_app * sh)
+void shell_prompt(char **av, char **env)
 {
 	char *argv[MAX_ARGS], *input = NULL;
 	int i;
@@ -36,26 +36,21 @@ void shell_prompt(__attribute__((unused)) shell_app * sh)
 			i++;
 		}
 
-		/*
-		argCount = tokenizeArgs(input, argv, DELIMS);
-		if (argCount == -1)
-			continue;
-		sh->inp = input;
-		*/
 		argv[0] = input;
-		executeCommand(argv, sh);
+		executeCommand(argv, av, sh);
 	}
 }
+
 /**
  * executeCommand - executes a command.
  *
  * @argv: array of arguments.
- *
- * @sh: shell
+ * @av: array of arguments.
+ * @env: array of environment variables.
  *
  * Return: void.
  */
-void executeCommand(char *argv[], shell_app *sh)
+void executeCommand(char* argv[], char **av, char* env[])
 {
 	pid_t child_pid;
 	int child_status;
@@ -68,7 +63,7 @@ void executeCommand(char *argv[], shell_app *sh)
 
 	if (child_pid == 0)
 	{
-		if ((execve(argv[0], sh->av, sh->sh_environ)) < 0)
+		if ((execve(argv[0], argv, env)) < 0)
 			exec_err(msg);
 
 	} else if (child_pid < 0)

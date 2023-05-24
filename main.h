@@ -66,8 +66,8 @@ void free_sh_data(shell_app *sh);
 int tokenizeArgs(char *input, char **arguments, char *delim);
 
 /*prompt*/
-void shell_prompt(shell_app *sh);
-void executeCommand(char *argv[], shell_app *sh);
+void shell_prompt(char **av, char **env);
+void executeCommand(char* argv[], char **av, char* env[]);
 
 /*shell_utils*/
 void get_sh_pid(int sig);
