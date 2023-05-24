@@ -20,7 +20,6 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
-#include <signal.h>
 #include <dirent.h>
 
 /*********************** Structures *********************/
