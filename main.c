@@ -52,7 +52,5 @@ int main(__attribute__((unused))int argc, char **argv)
 	/*signal(SIGINT, get_signalint);*/
 	set_shell_data(&shell, argv);
 	shell_prompt(&shell);
-
-	
 	return (0);
 }
