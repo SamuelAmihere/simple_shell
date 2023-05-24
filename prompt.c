@@ -55,7 +55,6 @@ void shell_prompt(__attribute__((unused)) shell_app * sh)
 void executeCommand(char *argv[], shell_app *sh)
 {
 	pid_t child_pid;
-	int child_status;
 
 	child_pid = fork();
 	if (child_pid == 0)
