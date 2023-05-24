@@ -9,13 +9,14 @@
  * Return: pointer to thr path , 0 if not found
  */
 
-char *path_find(char **argv)
+char *path_find(char **cmd)
 {
 char *path = getenv("PATH");
 char *dir;
 char *path_hold = strtok(path, ":");
 struct stat buffer;
-/*calculate the length of string and store in dir_len*/
+/*calculate the length of string and store in dir_len*eaclear
+ * 
 int dir_len = _strlen(argv[0]);
 /*check if has  NULL */
 while (path_hold != NULL)
