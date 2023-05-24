@@ -12,13 +12,13 @@
 void shell_prompt(__attribute__((unused)) shell_app * sh)
 {
 	char *argv[MAX_ARGS], *input = NULL;
-	int i, argCount, flag = 1;
+	int i;
 	size_t n = 0;
 	ssize_t read = 0;
 
-	while (flag)
+	while (1)
 	{
-		if (ISATTY(STDIN_FILENO))
+		if (ISATTY)
 			write(STDOUT_FILENO, ">>>> ", 5);
 		read = getline(&input, &n, stdin);
 		if (read == -1)
@@ -35,10 +35,13 @@ void shell_prompt(__attribute__((unused)) shell_app * sh)
 				input[i] = '\0';
 			i++;
 		}
+		/*
 		argCount = tokenizeArgs(input, argv, DELIMS);
 		if (argCount == -1)
 			continue;
 		sh->inp = input;
+		*/
+		argv[0] = input;
 		executeCommand(argv, sh);
 	}
 }
@@ -55,6 +58,7 @@ void shell_prompt(__attribute__((unused)) shell_app * sh)
 void executeCommand(char *argv[], shell_app *sh)
 {
 	pid_t child_pid;
+	int child_status;
 	char *cmd = sh->av[0];
 	char *s = ": No such file or directory\n";
 	char *msg[MAX_ARGS];
@@ -69,8 +73,9 @@ void executeCommand(char *argv[], shell_app *sh)
 			exec_err(msg);
 
 	} else if (child_pid < 0)
-		exit_shell("Error creating child process", NULL, EXIT_FAILURE);
+		exit_shell("Error creating child process",
+				NULL, EXIT_FAILURE);
 	else
-		wait(&(sh->status));
+		wait(&child_status);
 
 }

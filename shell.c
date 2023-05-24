@@ -17,10 +17,9 @@ void set_shell_data(shell_app *sh, char **av)
 	sh->status = 0;
 
 	/*count global environs*/
-	c = 0;
-	while (environ[c])
-		c += 1;
-	c += 1;
+	c = 1;
+	while (environ[c - 1])
+		c++;
 
 	/*create local environs*/
 	sh->sh_environ = malloc(sizeof(char *) * (c + 1));
@@ -32,7 +31,6 @@ void set_shell_data(shell_app *sh, char **av)
 	}
 
 	sh->sh_environ[c] = NULL;
-	sh->pid = _itos(getpid());
 
 }
 
@@ -51,6 +49,8 @@ int main(__attribute__((unused))int argc, char **argv)
 
 	/*signal(SIGINT, get_signalint);*/
 	set_shell_data(&shell, argv);
-	shell_prompt(&shell);
+
+	if (argc == 1)
+		shell_prompt(&shell);
 	return (0);
 }

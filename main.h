@@ -2,7 +2,7 @@
 #define MAIN_H
 
 /*macros*/
-#define ISATTY(fileno) isatty(fileno)
+#define ISATTY isatty(STDIN_FILENO)
 #define MAX_ARG_Token 100
 #define MAX_ARGS 10
 #define DELIMS " \n\t\a\r"
