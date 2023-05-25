@@ -11,10 +11,12 @@
  *
  * Return: 0 always on success
  */
-int main(int argc, char **argv, __attribute__((unused)) char **env)
+int main(int argc, char **argv, char **env)
 {
+	(void)  argc;
+
 	if (argc == 1)
-		start_shell(argv, env);
+		shell_prompt(argv, env);
 
 	return (0);
 }

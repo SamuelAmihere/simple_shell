@@ -37,7 +37,7 @@ void shell_prompt(char **av, char **env)
 		}
 
 		argv[0] = input;
-		executeCommand(argv, av, sh);
+		executeCommand(argv, av, env);
 	}
 }
 
@@ -50,13 +50,13 @@ void shell_prompt(char **av, char **env)
  *
  * Return: void.
  */
-void executeCommand(char* argv[], char **av, char* env[])
+void executeCommand(char *argv[], char **av, char *env[])
 {
 	pid_t child_pid;
 	int child_status;
 	char *msg[MAX_ARGS];
 
-	msg[0] = sh->av[0];
+	msg[0] = av[0];
 	msg[1] = ": No such file or directory\n";
 
 	child_pid = fork();
