@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * free_sh - free shell
+ * free_sh_data - free shell
  * @sh: shell
  * Return: void
  */

@@ -36,12 +36,13 @@ void shell_prompt(__attribute__((unused)) shell_app * sh)
 			i++;
 		}
 
-		/*
-		argCount = tokenizeArgs(input, argv, DELIMS);
-		if (argCount == -1)
-			continue;
-		sh->inp = input;
-		*/
+
+		/**
+		 * argCount = tokenizeArgs(input, argv, DELIMS);
+		 * if (argCount == -1)
+		 * continue;
+		 * sh->inp = input;
+		 */
 		argv[0] = input;
 		executeCommand(argv, sh);
 	}
