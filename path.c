@@ -13,7 +13,7 @@ char *path_find(char **argv)
 char *path = getenv("PATH");
 char *dir;
 char *path_hold = strtok(path, ":");
-/*calculate the length of string and store in dir_len*/ 
+/*calculate the length of string and store in dir_len*/
 int dir_len = _strlen(argv[0]);
 while (path_hold != NULL)
 {

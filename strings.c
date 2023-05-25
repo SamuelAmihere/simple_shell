@@ -17,7 +17,7 @@ char *_strdup(char *str)
 	if (str == NULL)
 		return (NULL);
 	/*count number of characters in the string*/
-	for (i = 0; str[i] != '\0'; i++);
+	for (i = 0; str[i] != '\0'; i++)
 	/*create memory to store new string*/
 	new_str = malloc((sizeof(char) * i) + 1);
 	/*return NULL if malloc fails*/
@@ -73,7 +73,7 @@ char *_strcpy(char *dest, char *src)
 int _strcmp(char *str1, char *str2)
 {
 	int i = 0;
-	
+
 	/*check if eithr str has reached null yet*/
 	while (str1[i] != '\0' && str2[i] != '\0')
 	{
@@ -83,13 +83,13 @@ int _strcmp(char *str1, char *str2)
 			i++;
 			continue;
 		}
-		/*check if one string is greateror less than the other*/ 
+		/*check if one string is greateror less than the other*/
 		else if (str1[i] > str2[i])
 			return (1);
 		else
 			return (-1);
 	}
-	
+
 	/*check if both  strings have ended at same string */
 	if (str1[i] == '\0' && str2[i] == '\0')
 		return (0);
@@ -113,12 +113,12 @@ size_t _strlen(char *str)
 	{
 		n++;
 	}
-	
+
 	return (n);
 }
 
 /**
- * -strcat - appends strings
+ * _strcat - appends strings
  * @src:the source of string to be appended
  * @dest: the destination to append to
  *Return: 0;
