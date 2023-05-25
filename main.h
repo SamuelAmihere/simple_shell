@@ -2,7 +2,7 @@
 #define MAIN_H
 
 /*macros*/
-#define ISATTY(fileno) isatty(fileno)
+#define ISATTY isatty(STDIN_FILENO)
 #define MAX_ARG_Token 100
 #define MAX_ARGS 10
 #define DELIMS " \n\t\a\r"
@@ -20,7 +20,6 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
-#include <signal.h>
 #include <dirent.h>
 
 /*********************** Structures *********************/
@@ -85,12 +84,12 @@ char *_itos(int n);
 int _count_digits(int n);
 
 /*str_utils*/
-size_t _strlen(const char *str);
-char *_strcat(char *dest, const char *src);
-char *_strdup(const char *str);
-char *_strcpy(char *dest, const char *src);
-int _strcmp(const char *str1, const char *str2);
-int _strncmp(const char *s1, const char *s2, size_t n);
+size_t _strlen(char *str);
+char *_strcat(char *dest, char *src);
+char *_strdup(char *str);
+char *_strcpy(char *dest, char *src);
+int _strcmp(char *str1, char *str2);
+int _strncmp(char *s1, char *s2, size_t n);
 char *_strncpy(char *dest, char *src, int n);
 /*build ins*/
 char *path_find(char **argv);
@@ -103,5 +102,5 @@ char *build_path(char *root, char *cm);
 
 /*errors*/
 void exit_shell(__attribute__((unused)) char *msg, char *input, int code);
-void exec_err(char *msg);
+void exec_err(char **msg);
 #endif

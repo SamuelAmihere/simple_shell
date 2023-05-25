@@ -1,6 +1,23 @@
 #include "main.h"
 
 /**
+ * free_sh - free shell
+ * @sh: shell
+ * Return: void
+ */
+void free_sh_data(shell_app *sh)
+{
+	unsigned int c;
+
+	c = 0;
+
+	for (; sh->sh_environ[c]; c++)
+		free(sh->sh_environ[c]);
+	free(sh->sh_environ);
+	free(sh->pid);
+}
+
+/**
  * set_shell_data - set shell data
  * @sh: shell structure
  * @av: arguments
@@ -17,10 +34,9 @@ void set_shell_data(shell_app *sh, char **av)
 	sh->status = 0;
 
 	/*count global environs*/
-	c = 0;
-	while (environ[c])
-		c += 1;
-	c += 1;
+	c = 1;
+	while (environ[c - 1])
+		c++;
 
 	/*create local environs*/
 	sh->sh_environ = malloc(sizeof(char *) * (c + 1));
@@ -32,12 +48,11 @@ void set_shell_data(shell_app *sh, char **av)
 	}
 
 	sh->sh_environ[c] = NULL;
-	sh->pid = _itos(getpid());
 
 }
 
 /**
- * main - Entry point to simple shell program
+ * main - Entry point to simpliie shell program
  *
  * @argc: argument counts
  *
@@ -51,6 +66,8 @@ int main(__attribute__((unused))int argc, char **argv)
 
 	/*signal(SIGINT, get_signalint);*/
 	set_shell_data(&shell, argv);
+
 	shell_prompt(&shell);
+	/*free_sh_data(&shell)*/
 	return (0);
 }
