@@ -1,15 +1,15 @@
 #include "main.h"
 
 
+
 /**
- * shell_prompt - runs the shell prompt.
+ * shell_prompt - creates shell
  *
- * @av: array of arguments.
- * @env: array of environment variables.
+ * @sh: shell
  *
- * Return: void.
+ * Return: nothing
  */
-void shell_prompt(char **av, char **env)
+void shell_prompt(__attribute__((unused)) shell_app * sh)
 {
 	char *argv[MAX_ARGS], *input = NULL;
 	int i;
@@ -36,34 +36,39 @@ void shell_prompt(char **av, char **env)
 			i++;
 		}
 
+		/*
+		argCount = tokenizeArgs(input, argv, DELIMS);
+		if (argCount == -1)
+			continue;
+		sh->inp = input;
+		*/
 		argv[0] = input;
-		executeCommand(argv, av, env);
+		executeCommand(argv, sh);
 	}
 }
-
 /**
  * executeCommand - executes a command.
  *
  * @argv: array of arguments.
- * @av: array of arguments.
- * @env: array of environment variables.
+ *
+ * @sh: shell
  *
  * Return: void.
  */
-void executeCommand(char *argv[], char **av, char *env[])
+void executeCommand(char *argv[], shell_app *sh)
 {
 	pid_t child_pid;
 	int child_status;
 	char *msg[MAX_ARGS];
 
-	msg[0] = av[0];
+	msg[0] = sh->av[0];
 	msg[1] = ": No such file or directory\n";
 
 	child_pid = fork();
 
 	if (child_pid == 0)
 	{
-		if ((execve(argv[0], argv, env)) < 0)
+		if ((execve(argv[0], sh->av, sh->sh_environ)) < 0)
 			exec_err(msg);
 
 	} else if (child_pid < 0)
