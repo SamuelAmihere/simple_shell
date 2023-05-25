@@ -1,15 +1,16 @@
 #include "main.h"
 /**
- * env - fucntion used to get environ variables
+ * envi - fucntion used to get environ variables
  *
  * Return: 1 - successful
  */
 int envi(void)
 {
+
 	size_t i = 0;
 	/* check if the value of i is not NULL*/
 
-	while(environ[i] != NULL)
+	while (environ[i] != NULL)
 	{
 		_puts(environ[i]);
 		_puts("\n");
@@ -19,8 +20,10 @@ int envi(void)
 }
 /**
  * shellexit - free memory and exits the shell program
- *@cmd: commandlinepointer to be freed
- *@lineptr: input buffer to be freed
+ *
+ * @cmd: commandlinepointer to be freed
+ * @lineptr: input buffer to be freed
+ * Return: 0 success
  */
 int shellexit(char **cmd, char *lineptr)
 {

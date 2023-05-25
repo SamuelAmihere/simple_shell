@@ -60,7 +60,7 @@ typedef struct array_shells
 
 /*function prototypes*/
 extern char **environ;
-int envi(void);
+void envi(void);
 int shellexit(char **cmd, char *lineeptr);
 void free_all(char **cmd, char *lineptr, char **environ);
 void free_sh_data(shell_app *sh);
