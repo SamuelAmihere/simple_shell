@@ -1,140 +1,107 @@
 #include "main.h"
-
 /**
- * _strdup - duplicate string
- *
- * @str: string to be duplicated
- *
- * Return: pointer to duplicated string
- */
-
-/*
-char *_strdup(char *str)
-{
-	int i;
-	char *new_str;
-
-	if (str == NULL)
-		return (NULL);
-	for (i = 0; str[i] != '\0'; i++)
-	new_str = malloc((sizeof(char) * i) + 1);
-	if (new_str == NULL)
-		return (NULL);
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		new_str[i] = str[i];
-	}
-	new_str[i] = '\0';
-
-	return (new_str);
-}
+* _strcat - concatenates two strings
+* @dest: input value
+* @src: input value
+*
+* Return: void
 */
-
-/**
- * _strcpy - copy string to from source (src)
- * to destination (dest)
- *
- * @dest: the location to copy strin to
- * @src: the string to be copied
- *
- * Return: pointer to destination
- */
-
-char *_strcpy(char *dest, char *src)
-{
-	int count = 0;
-
-	while (count >= 0)
-	{
-		*(dest + count) = *(src + count);
-		if (*(src + count) == '\0')
-			break;
-		count++;
-	}
-	return (dest);
-
-}
-
-/**
- * _strcmp - compare two strings
- *
- * @str1: first string
- * @str2: second string
- *
- * Return: 0 if two strings are equal
- * a negative value if the first string is less than the second
- * a positive value if the first is greater than the second
- */
-
-int _strcmp(char *str1, char *str2)
-{
-	int i = 0;
-
-	/*check if eithr str has reached null yet*/
-	while (str1[i] != '\0' && str2[i] != '\0')
-	{
-		/*compare  they point to equal srings */
-		if (str1[i] == str2[i])
-		{
-			i++;
-			continue;
-		}
-		/*check if one string is greateror less than the other*/
-		else if (str1[i] > str2[i])
-			return (1);
-		else
-			return (-1);
-	}
-
-	/*check if both  strings have ended at same string */
-	if (str1[i] == '\0' && str2[i] == '\0')
-		return (0);
-	/*checkif any string has reached NULL*/
-	else if (str1[i] == '\0')
-		return (-1);
-	else
-		return (1);
-}
-
-/**
- * _strlen - calculate the lenght of a string
- * @str: pointer to  a string to calculate
- * Return:  number  of bytes in the string
- */
-size_t _strlen(char *str)
-{
-	int n = 0;
-	/*check if the value of n has not reached NULL*/
-	while (str[n] != '\0')
-	{
-		n++;
-	}
-
-	return (n);
-}
-
-/**
- * _strcat - appends strings
- * @src:the source of string to be appended
- * @dest: the destination to append to
- *Return: 0;
- ** if src is NULL ||if dest and source pint to same string
- */
 char *_strcat(char *dest, char *src)
 {
-	int count = 0, count2 = 0;
-	char *temp = dest;
+int i;
+int j;
+i = 0;
+while (dest[i] != '\0')
+{
+i++;
+}
+j = 0;
+while (src[j] != '\0')
+{
+dest[i] = src[j];
+i++;
+j++;
+}
+dest[i] = '\0';
+return (dest);
+}
 
-	while (*(temp + count) != '\0')
-		count++;
+/**
+* _strlen - returns the length of a string
+* @s: string
+* Return: length
+*/
+int _strlen(char *s)
+{
+int len = 0;
+while (*s != '\0')
+{
+len++;
+s++;
+}
+return (longi);
+}
 
-	while (count2 >= 0)
-	{
-		*(temp + count) = *(src + count2);
-		if (*(src + count2) == '\0')
-			break;
-		count++;
-		count2++;
-	}
-	return (temp);
+/**
+* _strcmp - compare string values
+* @s1: input value
+* @s2: input value
+*
+* Return: s1[i] - s2[i]
+*/
+int _strcmp(char *s1, char *s2)
+{
+int i;
+i = 0;
+while (s1[i] != '\0' && s2[i] != '\0')
+{
+if (s1[i] != s2[i])
+{
+return (s1[i] - s2[i]);
+}
+i++;
+}
+return (0);
+}
+
+/**
+* char *_strcpy - a function that copies the string pointed to by src
+* @dest: copy to
+* @src: copy from
+* Return: string
+*/
+char *_strcpy(char *dest, char *src)
+{
+int l = 0;
+int x = 0;
+while (*(src + l) != '\0')
+{
+l++;
+}
+for ( ; x < l ; x++)
+{
+dest[x] = src[x];
+}
+dest[l] = '\0';
+return (dest);
+}
+/**
+* *_strdup - duplicates string
+* @str: The string to be duplicated
+*
+* Return: duplicated string *
+*/
+char *_strdup(char *str)
+{
+size_t len = _strlen(str);
+char *dup_str = malloc(len + 1);
+
+if (dup_str == NULL)
+{
+return (NULL);
+}
+
+_strcpy(dup_str, str);
+
+return (dup_str);
 }
