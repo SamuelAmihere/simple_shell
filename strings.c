@@ -8,31 +8,27 @@
  * Return: pointer to duplicated string
  */
 
+/*
 char *_strdup(char *str)
 {
 	int i;
 	char *new_str;
 
-	/*return NULL if string is NULL*/
 	if (str == NULL)
 		return (NULL);
-	/*count number of characters in the string*/
 	for (i = 0; str[i] != '\0'; i++)
-	/*create memory to store new string*/
 	new_str = malloc((sizeof(char) * i) + 1);
-	/*return NULL if malloc fails*/
 	if (new_str == NULL)
 		return (NULL);
-	/*copy string from str to new_string*/
 	for (i = 0; str[i] != '\0'; i++)
 	{
 		new_str[i] = str[i];
 	}
-	/*terminate new string with null character*/
 	new_str[i] = '\0';
 
 	return (new_str);
 }
+*/
 
 /**
  * _strcpy - copy string to from source (src)
