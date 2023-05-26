@@ -79,6 +79,8 @@ void executeCommand(char *argv[], char *av, char *env[]);
 /**************** helpers.c ***************/
 void show_prompt(void);
 
+/* args.c */
+int tokenizeArgs(char *input, char **arguments, char *delim);
 
 
 /* frees.c */
@@ -91,6 +93,8 @@ char *_strcpy(char *dest, char *src);
 int _strcmp(char *str1, char *str2);
 char *_strcat(char *dest, char *src);
 
+/* string_proc.c*/
+void remove_newline(char *bf);
 
 
 /* exits.c */

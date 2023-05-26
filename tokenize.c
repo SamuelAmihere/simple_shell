@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * tokenizeArgs - tokenizes the arguments.
@@ -23,7 +23,7 @@ int tokenizeArgs(char *input, char **arguments, char *delim)
 		/*Check if the number of arguments exceeds the maximum.*/
 		if (argCount >= MAX_ARGS)
 		{
-			fprintf(stderr, "Too many arguments\n");
+			write(STDOUT_FILENO, "Too many arguments", 18);
 			break;
 		}
 		/*Get the next token.*/

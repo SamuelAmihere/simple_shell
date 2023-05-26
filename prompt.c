@@ -11,7 +11,7 @@
 void shell_prompt(char **av, char **env)
 {
 	char *argv[MAX_ARGS] = {NULL, NULL}, *input = NULL;
-	int i;
+	int argCount;
 	size_t n = 0; /*The number of arguments.*/
 	ssize_t read = 0; /*The number of characters read.*/
 
@@ -33,18 +33,13 @@ void shell_prompt(char **av, char **env)
 				break;
 			}
 		}
-		i = 0;
-		if (input[i] == '\n')
+		if (input[0] == '\n')
 			continue;
-		/*Remove the newline character from the end of the input.*/
-		while (input[i])
-		{
-			if (input[i] == '\n')
-				input[i] = '\0';
-			i++;
-		}
-		argv[0] = input;
-		/*Execute the command.*/
+		
+		remove_newline(input);
+		argCount = tokenizeArgs(input, argv, " ");
+		if (argCount == 0)
+			continue;
 		executeCommand(argv, av[0], env);
 	}
 
