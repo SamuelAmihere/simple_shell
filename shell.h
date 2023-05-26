@@ -63,7 +63,7 @@ void free_sh_data(shell_app *sh);
 
 /* prompt.c */
 void shell_prompt(char **av, char **env);
-
+void update_array(char *argv[], char *str);
 
 
 
@@ -106,6 +106,12 @@ void exec_err(char **msg);
 char *build_err_message(char **msg);
 
 
-/* paths.h*/
+/* paths.c*/
 char *build_path(char *root, char *cm);
+
+
+/* path.c */
+char *path_find(char **argv);
+char *check_file(char *cm);
+
 #endif

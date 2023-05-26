@@ -14,6 +14,7 @@ void shell_prompt(char **av, char **env)
 	int argCount;
 	size_t n = 0; /*The number of arguments.*/
 	ssize_t read = 0; /*The number of characters read.*/
+	char *temp;
 
 	/* Print the prompt.*/
 	while (1)
@@ -40,7 +41,48 @@ void shell_prompt(char **av, char **env)
 		argCount = tokenizeArgs(input, argv, " ");
 		if (argCount == 0)
 			continue;
+
+		temp = path_find(argv);
+		if (temp != NULL)
+		{
+			update_array(argv, temp);
+		}
+		else
+			continue;
+		
+		if (!argv[0])
+			argv[0] = temp;
+
 		executeCommand(argv, av[0], env);
+	}
+
+}
+
+/**
+ * update_array - Updates elements of an array
+ *
+ * @argv: string array
+ * @str: new string
+ *
+ * Return: Nothing
+ */
+void update_array(char *argv[], char *str)
+{
+
+	int i = 0;
+
+	if (!argv || !str)
+		return;
+
+	while (argv[i])
+	{
+		if (_strcmp(argv[i], str) == 0)
+		{
+			i++;
+			continue;
+		}
+		argv[i] = str;
+		i++;
 	}
 
 }

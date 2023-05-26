@@ -10,31 +10,66 @@
  */
 char *path_find(char **argv)
 {
-char *path = getenv("PATH");
-char *dir;
-char *path_hold = strtok(path, ":");
-/*calculate the length of string and store in dir_len*/
-int dir_len = _strlen(argv[0]);
-while (path_hold != NULL)
-{
-size_t path_len = _strlen(path_hold);
-dir = malloc(dir_len + path_len + 2);
-if (dir == NULL)
-{
-return (NULL);
+	char *path = getenv("PATH");
+	char *dir = NULL;
+	char *path_hold = strtok(path, ":");
+	int dir_len = _strlen(argv[0]);
+	size_t path_len;
+
+	while (path_hold != NULL)
+	{
+		path_len = _strlen(path_hold);
+		dir = malloc(dir_len + path_len + 2);
+		if (dir == NULL)
+			return (NULL);
+
+		_strcpy(dir, path_hold);
+		_strcat(dir, "/");
+		_strcat(dir, argv[0]);
+		/*check for permissions */
+		if ((access(dir, F_OK) == 0))
+			return (dir);
+
+		free(dir);
+		/*check if all the path have been tokenized yet */
+		path_hold = strtok(NULL, ":");
+	}
+	return (dir);
 }
-_strcpy(dir, path_hold);
-_strcat(dir, "/");
-_strcat(dir, argv[0]);
-_strcat(dir, NULL);
-/*check for permissions */
-if ((access(dir, F_OK) == 0))
+
+/**
+ * check_cmd_path - checks if the command is inbuilt
+ * commands.
+ *
+ * @cm: command to check.
+ *
+ * Return: 1 if the command is in the inbuilt commands, 0 if not.
+ */
+int check_cmd_path(char *cm)
 {
-return (dir);
-}
-free(dir);
-/*check if all the path have been tokenized yet */
-path_hold = strtok(NULL, ":");
-}
-return (0);
+	int i = 0, j = 0;
+	char *root = "/bin/", *tmp;
+
+	tmp = malloc(sizeof(char) * _strlen(cm) + 1);
+	if (tmp == NULL)
+		return (0);
+	/*Check if the first part is /bin/.*/
+	while (root[i] != '\0')
+	{
+		if (root[i] != cm[i])
+		{
+			free(tmp);
+			return (0);
+		}
+		i++;
+	}
+
+	while (cm[i] != '\0')
+	{
+		tmp[j] = cm[i];
+		j++;
+		i++;
+	}
+	tmp[j] = '\0';
+	return (0);
 }
