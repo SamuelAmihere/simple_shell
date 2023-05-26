@@ -18,11 +18,18 @@ void shell_prompt(char **av, char **env)
 	/* Print the prompt.*/
 	while (1)
 	{
-		show_prompt();
-
-		read = getline(&input, &n, stdin);
-		if (read == -1)
-			exit_shell("", input, EXIT_FAILURE);
+		if (ISATTY)
+		{
+			write(STDOUT_FILENO, ">>>> ", 5);
+			read = getline(&input, &n, stdin);
+			if (read == -1)
+				exit_shell("", input, EXIT_FAILURE);
+		} else
+		{
+			read = getline(&input, &n, stdin);
+			if (read == -1)
+				break;
+		}
 		i = 0;
 		if (input[i] == '\n')
 			continue;
