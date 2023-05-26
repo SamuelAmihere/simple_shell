@@ -1,81 +1,40 @@
-#include "main.h"
-
-
+#include "shell.h"
 
 /**
- * shell_prompt - creates shell
+ * shell_prompt - runs the shell prompt.
  *
- * @sh: shell
- *
- * Return: nothing
- */
-void shell_prompt(__attribute__((unused)) shell_app * sh)
-{
-	char *argv[MAX_ARGS], *input = NULL;
-	int i;
-	size_t n = 0;
-	ssize_t read = 0;
-
-	while (1)
-	{
-		if (ISATTY)
-			write(STDOUT_FILENO, ">>>> ", 5);
-		read = getline(&input, &n, stdin);
-		if (read == -1)
-		{
-			exit_shell("", input, EXIT_FAILURE);
-		}
-
-		i = 0;
-		if (input[i] == '\n')
-			continue;
-		while (input[i])
-		{
-			if (input[i] == '\n')
-				input[i] = '\0';
-			i++;
-		}
-
-
-		/**
-		 * argCount = tokenizeArgs(input, argv, DELIMS);
-		 * if (argCount == -1)
-		 * continue;
-		 * sh->inp = input;
-		 */
-		argv[0] = input;
-		executeCommand(argv, sh);
-	}
-}
-/**
- * executeCommand - executes a command.
- *
- * @argv: array of arguments.
- *
- * @sh: shell
+ * @av: array of arguments.
+ * @env: array of environment variables.
  *
  * Return: void.
  */
-void executeCommand(char *argv[], shell_app *sh)
+void shell_prompt(char **av, char **env)
 {
-	pid_t child_pid;
-	int child_status;
-	char *msg[MAX_ARGS];
+	char *argv[MAX_ARGS], *input = NULL;
+	int i;
+	size_t n = 0; /*The number of arguments.*/
+	ssize_t read = 0; /*The number of characters read.*/
 
-	msg[0] = sh->av[0];
-	msg[1] = ": No such file or directory\n";
-
-	child_pid = fork();
-
-	if (child_pid == 0)
+	/* Print the prompt.*/
+	while (1)
 	{
-		if ((execve(argv[0], sh->av, sh->sh_environ)) < 0)
-			exec_err(msg);
+		show_prompt();
 
-	} else if (child_pid < 0)
-		exit_shell("Error creating child process",
-				NULL, EXIT_FAILURE);
-	else
-		wait(&child_status);
-
+		read = getline(&input, &n, stdin);
+		if (read == -1)
+			exit_shell("", input, EXIT_FAILURE);
+		i = 0;
+		if (input[i] == '\n')
+			continue;
+		/*Remove the newline character from the end of the input.*/
+		while (input[i])
+		{
+			if (input[i] == '\n')
+				input[i] = 0;
+			i++;
+		}
+		argv[0] = input;
+		/*Execute the command.*/
+		executeCommand(argv, av, env);
+	}
 }
