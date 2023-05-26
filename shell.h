@@ -70,7 +70,7 @@ void shell_prompt(char **av, char **env);
 
 
 /* execute_command.c */
-void executeCommand(char *argv[], char **av, char *env[]);
+void executeCommand(char *argv[], char *av, char *env[]);
 
 
 
@@ -84,19 +84,24 @@ void show_prompt(void);
 /* frees.c */
 
 
-/* helpers_string.c */
-int _strlen(char *s);
-int _strcmp(char *s1, char *s2);
+/* string.c */
+char *_strdup(char *str);
+size_t _strlen(char *str);
+char *_strcpy(char *dest, char *src);
+int _strcmp(char *str1, char *str2);
+char *_strcat(char *dest, char *src);
 
 
 
 /* exits.c */
 void exit_shell(__attribute__((unused)) char *msg, char *input, int code);
+void exec_err(char **msg);
 
 
+/* errors.c*/
+char *build_err_message(char **msg);
 
 
-
-/**/
-
+/* paths.h*/
+char *build_path(char *root, char *cm);
 #endif

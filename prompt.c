@@ -10,7 +10,7 @@
  */
 void shell_prompt(char **av, char **env)
 {
-	char *argv[MAX_ARGS], *input = NULL;
+	char *argv[MAX_ARGS] = {NULL, NULL}, *input = NULL;
 	int i;
 	size_t n = 0; /*The number of arguments.*/
 	ssize_t read = 0; /*The number of characters read.*/
@@ -35,6 +35,6 @@ void shell_prompt(char **av, char **env)
 		}
 		argv[0] = input;
 		/*Execute the command.*/
-		executeCommand(argv, av, env);
+		executeCommand(argv, av[0], env);
 	}
 }
