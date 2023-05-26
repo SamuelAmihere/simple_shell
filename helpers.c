@@ -10,5 +10,5 @@ void show_prompt(void)
 {
 	if (ISATTY)
 		/* Print the prompt.*/
-		printf(">>>> ");
+		write(STDOUT_FILENO, ">>>> ", 5);
 }

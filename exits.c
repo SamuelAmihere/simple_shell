@@ -13,6 +13,7 @@ void exit_shell(__attribute__((unused)) char *msg, char *input, int code)
 {
 	if (msg)
 		perror(msg);
+
 	free(input);
 	exit(code);
 }
