@@ -28,7 +28,10 @@ void shell_prompt(char **av, char **env)
 		{
 			read = getline(&input, &n, stdin);
 			if (read == -1)
+			{
+				free(input);
 				break;
+			}
 		}
 		i = 0;
 		if (input[i] == '\n')
@@ -37,7 +40,7 @@ void shell_prompt(char **av, char **env)
 		while (input[i])
 		{
 			if (input[i] == '\n')
-				input[i] = 0;
+				input[i] = '\0';
 			i++;
 		}
 		argv[0] = input;
