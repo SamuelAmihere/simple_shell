@@ -44,7 +44,7 @@ continue;
 if (_strcmp(input, "exit") == 0)
 {
 free(input);
-exit(1);
+exit(EXIT_SUCCESS);
 }
 executeCommand(argv, av[0], env);
 }

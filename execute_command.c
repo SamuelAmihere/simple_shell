@@ -21,6 +21,7 @@ void executeCommand(char *argv[], char *av, char *env[])
 
 	pth = check_file(argv[0]);
 	cmdpth = check_cmd_path(argv[0]);
+
 	if (pth)
 		argv[0] = pth;
 	inb = check_cmd_path(argv[0]);
