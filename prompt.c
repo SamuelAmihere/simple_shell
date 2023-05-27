@@ -28,7 +28,7 @@ exit_shell("", input, EXIT_FAILURE);
 else
 {
 read = getline(&input, &n, stdin);
-if (read == -1)
+if (read == -1 || _strcmp(input, "exit") == 0)
 {
 free(input);
 break;
@@ -41,6 +41,11 @@ remove_newline(input);
 argCount = tokenizeArgs(input, argv, " ");
 if (argCount == 0)
 continue;
+if (_strcmp(input, "exit") == 0)
+{
+free(input);
+exit(1);
+}
 executeCommand(argv, av[0], env);
 }
 
