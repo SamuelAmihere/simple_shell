@@ -113,5 +113,5 @@ char *build_path(char *root, char *cm);
 /* path.c */
 char *path_find(char **argv);
 char *check_file(char *cm);
-
+int check_cmd_path(char *cm);
 #endif
