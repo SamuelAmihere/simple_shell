@@ -10,43 +10,44 @@
 */
 void shell_prompt(char **av, char **env)
 {
-char *argv[MAX_ARGS] = {NULL, NULL}, *input = NULL;
-int argCount;
-size_t n = 0; /*The number of arguments.*/
-ssize_t read = 0; /*The number of characters read.*/
+	char *argv[MAX_ARGS] = {NULL, NULL}, *input = NULL;
+	int argCount;
+	size_t n = 0; /*The number of arguments.*/
+	ssize_t read = 0; /*The number of characters read.*/
 
-/* Print the prompt.*/
-while (1)
-{
-if (ISATTY)
-{
-write(STDOUT_FILENO, ">>>> ", 5);
-read = getline(&input, &n, stdin);
-if (read == -1)
-exit_shell("", input, EXIT_FAILURE);
-}
-else
-{
-read = getline(&input, &n, stdin);
-if (read == -1 || _strcmp(input, "exit") == 0)
-{
-free(input);
-break;
-}
-}
-if (input[0] == '\n')
-continue;
+	/* Print the prompt.*/
+	while (1)
+	{
+		if (ISATTY == 1)
+		{
+			write(STDOUT_FILENO, ">>>> ", 5);
+			read = getline(&input, &n, stdin);
+			if (read == -1)
+				exit_shell("", input, EXIT_FAILURE);
+		} else
+		{
+			read = getline(&input, &n, stdin);
+			if (read == -1)
+			{
+				free(input);
+				break;
+			}
+		}
+		if (input[0] == '\n')
+			continue;
 
-remove_newline(input);
-argCount = tokenizeArgs(input, argv, " ");
-if (argCount == 0)
-continue;
-if (_strcmp(input, "exit") == 0)
-{
-free(input);
-exit(EXIT_SUCCESS);
-}
-executeCommand(argv, av[0], env);
-}
-
+		remove_newline(input);
+		argCount = tokenizeArgs(input, argv, " ");
+		if (argCount == 0)
+			continue;
+		if (_strcmp(input, "exit") == 0)
+		{
+			free(input);
+			break;
+		}
+		executeCommand(argv, av[0], env);
+		{
+			fflush(stdin);
+		}
+	}
 }
