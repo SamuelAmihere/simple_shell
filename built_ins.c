@@ -12,7 +12,7 @@ int handle_builtins(char *argv[], __attribute__((unused))int len)
 	if (_strcmp(argv[0], "exit") == 0)
 	{
 		free(argv[0]);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 
 	return (1);
