@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <stdbool.h>
 
 /**
 * shell_prompt - runs the shell prompt.
@@ -40,14 +41,8 @@ void shell_prompt(char **av, char **env)
 		argCount = tokenizeArgs(input, argv, " ");
 		if (argCount == 0)
 			continue;
-		if (_strcmp(input, "exit") == 0)
-		{
-			free(input);
-			exit(0);
-		}
+		if (handle_builtins(argv, argCount) == 0)
+			continue;
 		executeCommand(argv, av[0], env);
-		{
-			fflush(stdin);
-		}
 	}
 }

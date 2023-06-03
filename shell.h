@@ -58,22 +58,15 @@ typedef struct array_shells
 
 /* shell_data.c */
 void set_shell_data(shell_app *sh);
-void free_sh_data(shell_app *sh);
-
+void set_vector(char **dest, char *src[], int len);
 
 /* prompt.c */
 void shell_prompt(char **av, char **env);
 void update_array(char *argv[], char *str);
 
 
-
-
-
 /* execute_command.c */
 void executeCommand(char *argv[], char *av, char *env[]);
-
-
-
 
 
 /**************** helpers.c ***************/
@@ -81,10 +74,10 @@ void show_prompt(void);
 
 /* args.c */
 int tokenizeArgs(char *input, char **arguments, char *delim);
-
+void free_sh_data(shell_app *sh);
 
 /* frees.c */
-
+void free_vec(char **arr, int n);
 
 /* string.c */
 char *_strdup(char *str);
@@ -96,6 +89,8 @@ char *_strcat(char *dest, char *src);
 /* string_proc.c*/
 void remove_newline(char *bf);
 
+/* built_ins.c */
+int handle_builtins(char *argv[], __attribute__((unused))int len);
 
 /* exits.c */
 void exit_shell(__attribute__((unused)) char *msg, char *input, int code);
