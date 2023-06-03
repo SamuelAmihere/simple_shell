@@ -90,7 +90,8 @@ char *_strcat(char *dest, char *src);
 void remove_newline(char *bf);
 
 /* built_ins.c */
-int handle_builtins(char *argv[], __attribute__((unused))int len);
+int handle_builtins(char *argv[], char *input,
+		__attribute__((unused))int len);
 
 /* exits.c */
 void exit_shell(__attribute__((unused)) char *msg, char *input, int code);
