@@ -43,7 +43,7 @@ void shell_prompt(char **av, char **env)
 		if (_strcmp(input, "exit") == 0)
 		{
 			free(input);
-			break;
+			exit(0);
 		}
 		executeCommand(argv, av[0], env);
 		{
